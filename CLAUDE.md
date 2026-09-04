@@ -12,9 +12,50 @@ credibility months after launch. The job is not to build a bigger thing. It's to
 actual decision, audit whether the model deserves trust, design a real (non-obvious) way
 its output reaches a rep, and be honest about what's still unproven.
 
-Deliverables: `audit/` (real investigation code), `serving/` (a script that scores
-`data/accounts_to_score.csv` and does one genuine AI-assisted thing with the output),
-`PROPOSAL.md` (~800–1,200 words, four required sections), `RESEARCH-LOG.md` (kept live).
+See "Required outputs" below for exactly what the finished repo needs to contain.
+
+## Required outputs
+
+### What PROPOSAL.md must cover
+
+1. **Problem framing.** Before touching the model: who is actually making a decision
+   based on its output, what that decision is, and what would show the model is actually
+   helping versus being noise everyone trusts by default.
+2. **Model audit.** What to trust this model on, what not to, and whether to ship its
+   scores as they are. Needs to reflect actual investigation of `model/model.pkl` and
+   `data/training_data.csv` — not a generic description of what an audit could look like.
+3. **AI-assisted serving design.** How the model's output on `data/accounts_to_score.csv`
+   actually reaches a rep or SDR manager in a way that changes their day — not a
+   per-account brief, not a priority-tier/routing rule, not just a score in a list. Should
+   do real work with the score, in a shape not already named in this brief.
+4. **Productionization and trust.** How a rep would know why an account is scored the way
+   it is, what they should trust vs. double-check, how the approach stays current over
+   time, and where the reasoning lands on Salesforce-native vs. external delivery
+   (weighed as a real tradeoff, not asserted).
+
+Target length: roughly 800–1,200 words total across the four sections.
+
+### What the repo must contain
+
+1. **Model audit (`audit/`)** — real code (notebook or scripts) run against
+   `model/model.pkl` and `data/training_data.csv`, showing what was actually checked and
+   what was found or ruled out.
+2. **AI-assisted serving step (`serving/`)** — a rough but real script that loads the
+   model, scores `data/accounts_to_score.csv`, and does one genuine AI-assisted thing
+   with the output (never a per-account brief or a priority-tier/routing rule). It needs
+   to run; it doesn't need to handle every edge case. If there's no live LLM API key
+   available, a clearly designed template with a documented plug-in point (what prompt,
+   what inputs, what it would return) counts the same as a live call — the design is
+   what's being evaluated, not whether a network request fires.
+3. **Written proposal (`PROPOSAL.md`)** — see above.
+4. **Research log (`RESEARCH-LOG.md`)** — kept live, not written after the fact (see the
+   "Research log" section below for the update rules). The final entry, once the work is
+   otherwise done, should pull together the base numbers, hypotheses, and assumptions
+   that would actually be stood behind in the room — the raw material for a presentation,
+   not the presentation itself.
+5. **Real git history** — committed incrementally as work actually happens, never
+   squashed into one commit at the end (the initial scaffold commit is the one
+   deliberate exception, as the shared starting point).
 
 ## Role
 
@@ -37,8 +78,8 @@ not to write the most code or the most polished analysis.
 - Consider how any proposed solution would fit into the user's actual workflow and how
   trust, adoption, and impact would be measured.
 - Be explicit about uncertainty and limitations.
-- Any code or analysis should remain simple enough for me to understand, explain,
-  modify, and defend live.
+- Any code or analysis should remain simple enough to be understood, explained,
+  modified, and defend live.
 - Treat the model and data as untrusted until earned — they weren't produced by us.
   Default posture is to look for reasons to doubt a number, not to confirm it works.
 - Verify AI-generated output (metrics, explanations, serving ideas) against the actual
@@ -51,16 +92,12 @@ not to write the most code or the most polished analysis.
   Use the provided model and data as given.
 - Treat **2026-08-01** as "today" for every recency/age calculation — not the system
   clock. Both CSVs are static snapshots as of that date.
-- The serving prototype must run the model on the provided scoring dataset and must
-  include a genuine AI-assisted component.
-- Do not build:
-  - per-account brief documents
-  - priority tiers or routing rules
-  - a simple ranked list of scores
 - Do not overengineer. Production-grade code, tests, and packaging are not required —
   this is a research repo. Rough-but-real beats polished-but-overbuilt.
 - State assumptions explicitly when context is ambiguous.
-- Real, incremental git history. Never squash progress into one commit at the end.
+
+See "Required outputs" above for what each deliverable must contain, including the
+serving-step exclusions and the git-history expectation.
 
 ## Research log
 
