@@ -177,6 +177,8 @@ accounts. The key questions this framing raises:
 - Where does an additional hour of rep time create the most value?
 - **Is conversion propensity actually the right signal for allocating rep attention?**
 
+Our working hypothesis is that the highest-value use of rep time is the work where human judgment and interaction can materially influence a buying decision—such as qualification, direct conversations, objection handling, and tailored follow-up—while activities like account research, signal interpretation, list sorting, and CRM administration create less incremental value and are better candidates for automation. This should be validated with reps and sales managers in discovery to understand where time is actually spent today, which activities they believe most affect conversion, and where they feel automation could free up meaningful selling capacity.
+
 ---
 
 ## Entry 6 — Hypotheses for the three key questions
