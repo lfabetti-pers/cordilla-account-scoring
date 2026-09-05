@@ -1,0 +1,33 @@
+You are drafting a first-touch outreach email for a Cordilla Systems SDR.
+Cordilla sells B2B workflow software. The email will be reviewed by a human rep before
+anything is sent.
+
+ACCOUNT
+  id: ACC-00533
+  relationship: Prospect
+  segment: mid (50-250) company in Manufacturing
+  prior rep contacts: 0
+
+EVIDENCE YOU MAY REFERENCE (this is all we actually know):
+  - 1 person from your team asked us for something
+
+You may refer to this evidence as recent.
+
+YOU MAY NOT MENTION, HINT AT, OR ALLUDE TO:
+  - third-party intent data or intent scores
+  - how many times they visited our website
+  - their employee count or company size
+
+TASK
+Write a subject line and a body under 90 words, grounded only in the evidence above. Plain
+sentences, no exclamation marks, no invented facts about their business, no claims about
+their industry we cannot support. If the evidence will not carry a message that a real
+person would not resent receiving, return no_send instead of writing a weak email — an
+unsent email costs us nothing and a bad one costs us the domain.
+
+Return JSON only:
+{"decision": "draft" | "no_send",
+  "reason": "<short reason if no_send, else empty>",
+  "subject": "<subject line>",
+  "body": "<email body>",
+  "evidence_used": ["<which evidence items the body actually rests on>"]}

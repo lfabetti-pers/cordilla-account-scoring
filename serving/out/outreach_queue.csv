@@ -1,0 +1,165 @@
+account_id,decision,reason,subject,body,evidence_used,referenceable_evidence,internal_only,snapshot_age_days,score,source
+ACC-01491,no_send,evidence-too-stale (290d old),,,,started a trial and 3 of your people are using it | 1 person from your team asked us for something,"intent vendor coverage: yes, score 33 | web touchpoints in window: 0 | employee count: 188 | industry: Retail",290,0.2094,gate
+ACC-00371,no_send,evidence-too-stale (256d old),,,,started a trial and 2 of your people are using it | 4 people from your team asked us for something | worked with Cordilla before,"intent vendor coverage: yes, score 64 | web touchpoints in window: 8 | employee count: 22 | industry: Financial Services",256,0.2045,gate
+ACC-01064,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — our records show you started a trial and 1 of your people is using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 1 of your people is using it,started a trial and 1 of your people is using it | 1 person from your team asked us for something,"intent vendor coverage: yes, score 62 | web touchpoints in window: 0 | employee count: 57 | industry: Retail",94,0.1869,template
+ACC-01283,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 61 | web touchpoints in window: 3 | employee count: 50 | industry: Retail",122,0.1757,gate
+ACC-01111,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+Picking this back up — our records show you started a trial and 2 of your people are using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 2 of your people are using it,started a trial and 2 of your people are using it,"intent vendor coverage: yes, score 58 | web touchpoints in window: 4 | employee count: 44 | industry: Manufacturing",109,0.1527,template
+ACC-00400,draft,,Quick question about your software workflows,"Hi there,
+
+Picking this back up — I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 24 | web touchpoints in window: 0 | employee count: 109 | industry: Software",86,0.1522,template
+ACC-00122,no_send,nothing-to-reference,,,,,intent vendor coverage: none | web touchpoints in window: 5 | employee count: 698 | industry: Manufacturing,38,0.1482,gate
+ACC-00646,no_send,evidence-too-stale (272d old),,,,2 people from your team asked us for something,intent vendor coverage: none | web touchpoints in window: 3 | employee count: 637 | industry: Manufacturing,272,0.1482,gate
+ACC-00657,no_send,evidence-too-stale (305d old),,,,4 people from your team asked us for something,"intent vendor coverage: yes, score 24 | web touchpoints in window: 8 | employee count: 562 | industry: Financial Services",305,0.1438,gate
+ACC-00232,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — I saw that you started a trial and 3 of your people are using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 3 of your people are using it,started a trial and 3 of your people are using it | 1 person from your team asked us for something,"intent vendor coverage: yes, score 24 | web touchpoints in window: 0 | employee count: 301 | industry: Retail",59,0.1408,template
+ACC-00065,no_send,evidence-too-stale (260d old),,,,signed up for a trial but nobody has logged in yet,"intent vendor coverage: yes, score 8 | web touchpoints in window: 13 | employee count: 42 | industry: Healthcare",260,0.1366,gate
+ACC-00966,no_send,evidence-too-stale (207d old),,,,4 people from your team asked us for something,"intent vendor coverage: yes, score 52 | web touchpoints in window: 8 | employee count: 74 | industry: Retail",207,0.1335,gate
+ACC-00205,no_send,evidence-too-stale (419d old),,,,2 people from your team asked us for something,"intent vendor coverage: yes, score 63 | web touchpoints in window: 5 | employee count: 243 | industry: Retail",419,0.1289,gate
+ACC-00265,draft,,Quick question about your professional services workflows,"Hi there,
+
+Picking this back up — our records show you signed up for a trial but nobody has logged in yet. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",signed up for a trial but nobody has logged in yet,signed up for a trial but nobody has logged in yet,intent vendor coverage: none | web touchpoints in window: 0 | employee count: 133 | industry: Professional Services,93,0.1221,template
+ACC-00533,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 63 | web touchpoints in window: 7 | employee count: 65 | industry: Manufacturing",13,0.1219,template
+ACC-00146,no_send,evidence-too-stale (192d old),,,,signed up for a trial but nobody has logged in yet,"intent vendor coverage: yes, score 4 | web touchpoints in window: 3 | employee count: 62 | industry: Manufacturing",192,0.1217,gate
+ACC-01382,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 24 | web touchpoints in window: 2 | employee count: 127 | industry: Healthcare",335,0.116,gate
+ACC-01019,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+Picking this back up — our records show you 5 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",5 people from your team asked us for something,5 people from your team asked us for something,"intent vendor coverage: yes, score 8 | web touchpoints in window: 0 | employee count: 29 | industry: Manufacturing",130,0.1159,template
+ACC-01155,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — I saw that you 4 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",4 people from your team asked us for something,4 people from your team asked us for something,"intent vendor coverage: yes, score 24 | web touchpoints in window: 1 | employee count: 85 | industry: Retail",30,0.1157,template
+ACC-00728,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 9 | web touchpoints in window: 10 | employee count: 32 | industry: Software",73,0.1157,gate
+ACC-01129,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+Our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 78 | web touchpoints in window: 5 | employee count: 76 | industry: Manufacturing",126,0.1135,template
+ACC-00100,draft,,Quick question about your software workflows,"Hi there,
+
+Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 42 | web touchpoints in window: 12 | employee count: 16 | industry: Software",94,0.1129,template
+ACC-00958,no_send,evidence-too-stale (409d old),,,,worked with Cordilla before,intent vendor coverage: none | web touchpoints in window: 0 | employee count: 106 | industry: Manufacturing,409,0.1119,gate
+ACC-01339,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 70 | web touchpoints in window: 3 | employee count: 42 | industry: Healthcare",240,0.1119,gate
+ACC-00686,draft,,Quick question about your professional services workflows,"Hi there,
+
+Picking this back up — our records show you started a trial and 3 of your people are using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 3 of your people are using it,started a trial and 3 of your people are using it,intent vendor coverage: none | web touchpoints in window: 1 | employee count: 46 | industry: Professional Services,143,0.1113,template
+ACC-00832,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 15 | web touchpoints in window: 0 | employee count: 52 | industry: Manufacturing",52,0.1102,gate
+ACC-01496,draft,,Quick question about your retail workflows,"Hi there,
+
+Our records show you 2 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",2 people from your team asked us for something,2 people from your team asked us for something | worked with Cordilla before,"intent vendor coverage: yes, score 38 | web touchpoints in window: 13 | employee count: 277 | industry: Retail",113,0.1093,template
+ACC-00768,no_send,evidence-too-stale (213d old),,,,signed up for a trial but nobody has logged in yet,intent vendor coverage: none | web touchpoints in window: 14 | employee count: 69 | industry: Manufacturing,213,0.1093,gate
+ACC-01102,draft,,Quick question about your professional services workflows,"Hi there,
+
+Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 42 | web touchpoints in window: 10 | employee count: 29 | industry: Professional Services",96,0.1078,template
+ACC-00101,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+Picking this back up — our records show you 2 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",2 people from your team asked us for something,2 people from your team asked us for something | worked with Cordilla before,"intent vendor coverage: yes, score 46 | web touchpoints in window: 0 | employee count: 30 | industry: Manufacturing",140,0.1068,template
+ACC-00175,draft,,Quick question about your professional services workflows,"Hi there,
+
+Picking this back up — our records show you worked with Cordilla before. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",worked with Cordilla before,worked with Cordilla before,"intent vendor coverage: yes, score 25 | web touchpoints in window: 0 | employee count: 317 | industry: Professional Services",98,0.1063,template
+ACC-00260,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 31 | web touchpoints in window: 12 | employee count: 85 | industry: Financial Services",427,0.1061,gate
+ACC-00506,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 52 | web touchpoints in window: 0 | employee count: 16 | industry: Software",20,0.106,gate
+ACC-00076,draft,,Quick question about your financial services workflows,"Hi there,
+
+I saw that you signed up for a trial but nobody has logged in yet. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",signed up for a trial but nobody has logged in yet,signed up for a trial but nobody has logged in yet,"intent vendor coverage: yes, score 35 | web touchpoints in window: 9 | employee count: 149 | industry: Financial Services",87,0.1031,template
+ACC-00935,no_send,nothing-to-reference,,,,,intent vendor coverage: none | web touchpoints in window: 2 | employee count: 218 | industry: Manufacturing,234,0.1024,gate
+ACC-00802,draft,,Quick question about your software workflows,"Hi there,
+
+Our records show you signed up for a trial but nobody has logged in yet. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",signed up for a trial but nobody has logged in yet,signed up for a trial but nobody has logged in yet | 2 people from your team asked us for something,"intent vendor coverage: yes, score 51 | web touchpoints in window: 5 | employee count: 150 | industry: Software",113,0.1022,template
+ACC-00828,draft,,Quick question about your healthcare workflows,"Hi there,
+
+Picking this back up — I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 39 | web touchpoints in window: 0 | employee count: 23 | industry: Healthcare",60,0.1012,template
+ACC-00527,no_send,evidence-too-stale (343d old),,,,3 people from your team asked us for something,"intent vendor coverage: yes, score 31 | web touchpoints in window: 0 | employee count: 107 | industry: Retail",343,0.0993,gate
+ACC-01415,no_send,evidence-too-stale (437d old),,,,signed up for a trial but nobody has logged in yet,intent vendor coverage: none | web touchpoints in window: 5 | employee count: 143 | industry: Professional Services,437,0.0978,gate
+ACC-00730,no_send,evidence-too-stale (302d old),,,,3 people from your team asked us for something,"intent vendor coverage: yes, score 41 | web touchpoints in window: 10 | employee count: 16 | industry: Financial Services",302,0.0976,gate
+ACC-00873,no_send,nothing-to-reference,,,,,intent vendor coverage: none | web touchpoints in window: 11 | employee count: 29 | industry: Professional Services,211,0.0968,gate
+ACC-01493,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 41 | web touchpoints in window: 10 | employee count: 87 | industry: Healthcare",91,0.0957,gate
+ACC-00570,no_send,nothing-to-reference,,,,,intent vendor coverage: none | web touchpoints in window: 0 | employee count: 28 | industry: Manufacturing,105,0.0954,gate
+ACC-01471,draft,,Quick question about your professional services workflows,"Hi there,
+
+I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something | worked with Cordilla before,"intent vendor coverage: yes, score 46 | web touchpoints in window: 9 | employee count: 83 | industry: Professional Services",29,0.0951,template
+ACC-00915,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 44 | web touchpoints in window: 3 | employee count: 93 | industry: Retail",104,0.095,template
+ACC-01021,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 39 | web touchpoints in window: 8 | employee count: 135 | industry: Retail",290,0.0949,gate
+ACC-00082,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 53 | web touchpoints in window: 0 | employee count: 50 | industry: Professional Services",81,0.0942,gate
+ACC-00758,no_send,nothing-to-reference,,,,,intent vendor coverage: none | web touchpoints in window: 9 | employee count: 9 | industry: Professional Services,62,0.0941,gate
+ACC-00183,no_send,evidence-too-stale (447d old),,,,5 people from your team asked us for something,"intent vendor coverage: yes, score 68 | web touchpoints in window: 0 | employee count: 29 | industry: Retail",447,0.0939,gate
+ACC-01386,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 36 | web touchpoints in window: 9 | employee count: 60 | industry: Healthcare",355,0.0935,gate
+ACC-00421,no_send,evidence-too-stale (249d old),,,,2 people from your team asked us for something,"intent vendor coverage: yes, score 30 | web touchpoints in window: 0 | employee count: 88 | industry: Software",249,0.0923,gate
+ACC-01128,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — our records show you started a trial and 5 of your people are using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 5 of your people are using it,started a trial and 5 of your people are using it,intent vendor coverage: none | web touchpoints in window: 0 | employee count: 20 | industry: Retail,143,0.0921,template
+ACC-00962,no_send,evidence-too-stale (321d old),,,,started a trial and 3 of your people are using it,"intent vendor coverage: yes, score 58 | web touchpoints in window: 1 | employee count: 90 | industry: Software",321,0.0917,gate
+ACC-00787,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+Our records show you started a trial and 5 of your people are using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 5 of your people are using it,started a trial and 5 of your people are using it | 3 people from your team asked us for something | worked with Cordilla before,"intent vendor coverage: yes, score 53 | web touchpoints in window: 0 | employee count: 62 | industry: Manufacturing",119,0.0907,template
+ACC-00391,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — our records show you worked with Cordilla before. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",worked with Cordilla before,worked with Cordilla before,intent vendor coverage: none | web touchpoints in window: 11 | employee count: 81 | industry: Retail,150,0.0893,template
+ACC-00839,draft,,Quick question about your manufacturing workflows,"Hi there,
+
+Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",1 person from your team asked us for something,1 person from your team asked us for something,"intent vendor coverage: yes, score 10 | web touchpoints in window: 1 | employee count: 48 | industry: Manufacturing",112,0.0892,template
+ACC-01394,draft,,Quick question about your healthcare workflows,"Hi there,
+
+I saw that you started a trial and 1 of your people is using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 1 of your people is using it,started a trial and 1 of your people is using it | 3 people from your team asked us for something,intent vendor coverage: none | web touchpoints in window: 9 | employee count: 61 | industry: Healthcare,81,0.0883,template
+ACC-00042,no_send,evidence-too-stale (617d old),,,,started a trial and 4 of your people are using it | 1 person from your team asked us for something,"intent vendor coverage: yes, score 34 | web touchpoints in window: 1 | employee count: 191 | industry: Software",617,0.0882,gate
+ACC-00525,draft,,Quick question about your retail workflows,"Hi there,
+
+Picking this back up — I saw that you started a trial and 3 of your people are using it. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+
+Worth fifteen minutes to find out?",started a trial and 3 of your people are using it,started a trial and 3 of your people are using it | 1 person from your team asked us for something,"intent vendor coverage: yes, score 28 | web touchpoints in window: 4 | employee count: 14 | industry: Retail",89,0.0881,template
+ACC-00270,no_send,nothing-to-reference,,,,,"intent vendor coverage: yes, score 12 | web touchpoints in window: 2 | employee count: 45 | industry: Financial Services",95,0.0876,gate
