@@ -266,11 +266,17 @@ def generate_opener(payload):
                 max_tokens=600,
                 messages=[{"role": "user", "content": build_prompt(payload)}],
             )
-            out = json.loads(resp.content[0].text)
+            # Models like to wrap JSON in prose, so take the outermost braces.
+            text = resp.content[0].text
+            out = json.loads(text[text.index("{"):text.rindex("}") + 1])
             out["source"] = "claude-sonnet-5"
             return out
         except ImportError:
             print("anthropic not installed (pip install anthropic) — using template",
+                  file=sys.stderr)
+        except (ValueError, KeyError, IndexError) as e:
+            # Unparseable reply: fall through to the template rather than lose the account.
+            print(f"{payload['account_id']}: unusable model reply ({e}) — using template",
                   file=sys.stderr)
         # -----------------------------------------------------------------------------
 
