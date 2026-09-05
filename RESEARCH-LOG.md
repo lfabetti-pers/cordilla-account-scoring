@@ -946,6 +946,75 @@ the current cold baseline follows. Withholding a random share of eligible accoun
 the control group that separates the tool from the rep — and that same pilot produces the
 labeled outcomes the audit named as a blocking dependency.
 
+### Numbers I'd stand behind
+
+All computed in `audit/model_data_audit.ipynb` or `serving/draft_outreach.py`, against the
+provided files, with 2026-08-01 as today.
+
+*Training data (1,200 rows):*
+- Base rate 6.50% overall; 7.11% among the 1,097 rows whose outcome window had closed.
+- 103 rows (8.6%) censored — conversion exactly 0.0%, against 7.3 / 8.1 / 5.9 / 5.6% in the
+  older buckets.
+- 59.4% had already been contacted by a rep. Strictly cold accounts (no MQL, no trial, no
+  web, never contacted, n=56) still convert at 3.6%, against a stated "<1%".
+- Intent coverage: 8.2% conversion with, 3.9% without; holds inside every size quartile
+  (10.0/4.0, 6.9/1.5, 7.7/6.1, 8.2/4.4). 482 blanks, all imputed to 25.3 before training.
+- Coverage by size quartile 40.8 / 42.8 / 38.6 / 38.4% — flat, so the brief's "intent skews
+  to larger accounts" is not true in this file.
+- 2 of 9 variables clear two standard errors; `sales_contacts_90d` is the widest (12.5% at
+  4+ vs 5.3% at zero) and is circular.
+- Snapshot age: median 280 days, max 711. `snapshot_date` is not a model input.
+
+*Scoring data (300 rows):*
+- Model output spans 3.8%–21%, median 5.4%, p90 10.6% — very little separation.
+- 38.7% have no intent data. Median snapshot age 121 days, max 675; only 82 of 300 are
+  newer than 90 days.
+- Serving run: of the top 60, 26 drafted and 34 declined (17 nothing sayable, 17 evidence
+  over 180 days old).
+
+### Hypotheses, and where each one stands
+
+- *Reps are not fully guessing, but using an informal heuristic (recency, size, visible
+  marketing activity).* **Untested** — not answerable from these files; discovery question.
+- *Rep value concentrates where judgment and interaction move a buying decision; research,
+  list-sorting and admin are automation candidates.* **Untested, and load-bearing** — the
+  serving design assumes it.
+- *Value is not in the highest-propensity accounts (may convert anyway) nor the coldest
+  (unmovable), but in engaged-not-yet-converted accounts, weighted by deal size.*
+  **Untestable here** — no deal-size field exists.
+- *Propensity is useful but insufficient; the decision may need uplift.* **Supported
+  indirectly** — rescoring each account with one added rep contact gives a "responsiveness"
+  ordering uncorrelated with the score itself (−0.007, zero overlap in top tens), so the two
+  questions genuinely have different answers.
+- *The first Cordilla model died of drift.* **Rejected.** Conversion (7.3/8.1/5.9/5.6%) and
+  intent coverage (40.5/40.1/39.8/36.0%) are flat across the two years covered. The data is
+  internally stable at the wrong level — a sampling problem, not a drift problem.
+
+### Assumptions the proposal rests on
+
+1. The activity fields are accurate where present, even though the labels are not.
+2. Approving a draft is materially cheaper for a rep than writing from scratch.
+3. Freed hours get spent on higher-value accounts rather than absorbed elsewhere.
+4. `converted_within_90d` is an acceptable proxy for commercial value, though it is a
+   binary, not revenue, and no deal-size field exists to check the gap.
+5. A rep is willing to work an approval queue at all — untested, and the fastest way for
+   the pilot to fail on adoption rather than on accuracy.
+6. The model's ordering is good enough to select draft candidates. **Weakest of the six**,
+   which is why the refusal gates are ordinary code that holds whatever the model does.
+
+### Dead ends, kept because they cost time
+
+- **Measuring model performance.** AUC (~0.76) and top-decile lift (~4x) were computed
+  before recognising every row was training data. Removed rather than published with a
+  caveat — a number known to be inflated gets quoted later without its footnote.
+- **Proving provenance from the pickle.** Confirming via stored imputer medians and class
+  prior that the model saw all 1,200 rows restated something the brief already said.
+- **Counterfactual serving designs.** Scoring each account twice (with an added contact, or
+  with recent activity stripped) makes the model genuinely load-bearing, but was dropped as
+  too complex for this deliverable. Kept as the answer to "what if the model were good?"
+- **Grouping the batch into plays.** Rejected once it was clear a `GROUP BY` on the raw
+  features produced the same groups, leaving the model decorative.
+
 ### The honest summary
 
 We inherited an unvalidated model trained on the wrong population with broken labels, and
