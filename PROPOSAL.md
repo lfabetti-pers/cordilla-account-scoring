@@ -83,16 +83,31 @@ that approving beats writing from scratch; that the activity fields are accurate
 present; and that the score orders candidates well enough to be worth using — the weakest
 one, which is why the gates are ordinary code that holds whatever the model does.
 
-**How we would know.** The metric that decides it is the one named in section 1:
-**revenue per rep hour**. This solution only moves it by freeing hours that reps then spend
-on accounts that convert, so both halves have to be measured — hours returned per rep per
-week, and whether the queue's accounts close better than what reps pick unaided. Two
-leading indicators arrive first. Approval rate reads in week one: if reps reject or rewrite
-most drafts, the evidence is too thin and we stop, and what they edit says what's missing.
-Reply rate per hundred sends against the current cold baseline follows. Withholding a
-random share of eligible accounts gives the control group that separates the tool from the
-rep — and that same pilot produces the labeled outcomes the audit named as a blocking
-dependency.
+**How we would know it works.** Three layers, kept separate so a good number at one is
+never mistaken for success at another.
+
+*Model.* Conversion lift in the top K accounts, where K is actual rep capacity — if reps
+can work 10% of the base, the measure is conversion in the top 10% by score divided by the
+overall rate. This cannot be computed today: no labeled holdout exists, which is the
+blocking dependency from section 2. The pilot is what produces it, one closed 90-day window
+at a time.
+
+*Operational.* Approval rate reads in week one and is the kill criterion — if reps reject
+or heavily rewrite most drafts, the evidence is too thin and we stop. What they edit says
+what is missing. Then hours returned per rep per week, and reply rate per hundred sends
+against the current cold baseline.
+
+*Business.* **Revenue per rep hour**, the metric from section 1, because it captures usage
+impact on economic results rather than activity. Tested as an A/B: one group on the as-is
+process as baseline, one on the queue, with eligible accounts randomly withheld so the tool
+is separated from the rep. Both halves of the chain must move — hours freed, *and* those
+hours spent on accounts that close better than what reps pick unaided. Hours freed alone
+proves nothing.
+
+Separately, the assumption this design rests on — that rep value sits in judgment rather
+than in research and drafting — is validated in discovery, not by the pilot: where time
+actually goes today, which activities reps believe move conversion, and where they think
+automation would free real selling capacity.
 
 ## 4. Productionization and trust
 
