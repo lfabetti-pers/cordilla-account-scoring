@@ -2,11 +2,26 @@
 
 ## 1. Problem framing
 
-To solve the rep allocation problem two questions should be answered: which accounts should they focus on at each given time and what is the next best action?
+The ask was "a dashboard so reps stop guessing which accounts to call" — a solution, not a
+problem. Two questions sit underneath it: are reps actually guessing, and why would that be
+a problem? The first is a discovery question we cannot answer from these files; the second
+is what reframed the work. Reps have fixed capacity and the Salesforce instance holds tens
+of thousands of mostly untouched noncustomers, so the constraint is not a shortage of
+accounts to call — it is that **rep attention is scarce** and most of the base will never be
+touched at all. The real question is therefore not "which accounts rank highest" but:
 
-A model that calculates conversion likelihood can definitely help to direct attention, the pending question would be which of these accounts need human attention and which don't.
+> Given limited rep capacity, which accounts should receive human attention now, and where
+> will that attention create the most value?
 
-The first question is what decision would be affected by the use of the model, who makes that decision now and how.
+That reframing matters because a ranked list does not by itself change how an hour of rep
+time gets spent. It splits the problem in two — which accounts deserve attention now, and
+what the next best action is for them — and only the first is something a score can answer.
+A conversion-likelihood model can help direct attention, but it conflates "will convert
+anyway" with "needs a nudge", and ignores deal size entirely when the commercial goal is
+ARR; `converted_within_90d` is a proxy for value, not value. So the open question is which
+of these accounts actually need human attention and which do not.
+
+Next is what decision the model would change, who makes that decision today, and how.
 At this point we don't fully understand how the decision of which accounts to pay attention to is made (we don't know how sales uses the data, this is a pending question for user interviews), so we can't determine yet if the model would be used by reps, their managers or both. Right now we can only determine if a model has value as an attention driving mechanism or not. The actual use should be determined later. An assumption will be made to propose a first possible use.
 
 The final proof to understand if the model is helping would be using the appropriate business metrics (such as revenue per rep hour spent, for example). The questions to guide the audit will be:
