@@ -1,20 +1,19 @@
 # Proposal — Cordilla account scoring
 
-_Draft in progress. Target 800–1,200 words, covering the four required sections._
-
 ## 1. Problem framing
 
-To solve the rep allocation problem two questions should be ansewred: which accounts should they focus on at each given time and what is the next best action?
+To solve the rep allocation problem two questions should be answered: which accounts should they focus on at each given time and what is the next best action?
 
-A model that calculates conversion likelyhood can defifnitely help to direct attention, the pending question would be which of these accounts need human attention and which dont.
+A model that calculates conversion likelihood can definitely help to direct attention, the pending question would be which of these accounts need human attention and which don't.
 
 The first question is what decision would be affected by the use of the model, who makes that decision now and how.
-At this point we dont fully understand how the decision of which accounts to pay attention to is made (we dont know how sales uses the data, this is a pending question for user interviews), so we cant determine yet if the model would be used by reps, their managers or both. Right now we can only determine if a model has value as an attention driving mechanism or not. The actual use should be determined later. An assumption will be made to propose a first possible use.
+At this point we don't fully understand how the decision of which accounts to pay attention to is made (we don't know how sales uses the data, this is a pending question for user interviews), so we can't determine yet if the model would be used by reps, their managers or both. Right now we can only determine if a model has value as an attention driving mechanism or not. The actual use should be determined later. An assumption will be made to propose a first possible use.
 
-The final proof to understand if the model is helping would be using the appropiate busniess metrics (such as revenue per rep hour spen for example). The questions to guide the audit will be:
-- performance: general and across segments (should the model be trusted equally on all accounts or is it more valuable fore some?)
+The final proof to understand if the model is helping would be using the appropriate business metrics (such as revenue per rep hour spent, for example). The questions to guide the audit will be:
+- performance: general and across segments (should the model be trusted equally on all accounts or is it more valuable for some?)
 - check variable correlation to target
-- is it still usefull as it is? my first guess would me no. How old is training data? it should probably be retrained as signals may have changed as well as data distributions (data drift) which is probably what killed the first model in teh first place. COmpare training data distribution with data of accounts to score.
+- is it still useful as it is? My first guess would be no. How old is training data? it should probably be retrained as signals may have changed as well as data distributions (data drift) which is probably what killed the first model in the first place. Compare training data distribution with data of accounts to score.
+- Is training data valid, generally speaking?
 
 ## 2. Model audit
 
@@ -28,7 +27,7 @@ labeled test set is a blocking dependency before any performance claim. *(Entry 
 **The training data does not represent the accounts it would be used on.** It converts
 at 6.5%, while real conversion is well under 1% for cold accounts, and 59.4% of its
 accounts had already been contacted by a rep, in an account base described as mostly
-untouched. This is a sampling problem (or deliberate decision we dont yet undertand), 
+untouched. This is a sampling problem (or deliberate decision we don't yet understand), 
 not drift: across the two years the data covers, conversion rates and vendor coverage 
 stay flat, so the data did not change over time —it was selected badly from the start.
 
@@ -48,7 +47,7 @@ other is `intent_score`, where the signal is whether the vendor has coverage (4.
 6.7–10.9%) rather than the value, which has no ordering. The other seven are
 indistinguishable from chance. *(Entry 24.)*
 
-**The training dataset has to be re engineered:** retraining on a dataset representing the population being
+**The training dataset has to be re-engineered:** retraining on a dataset representing the population being
 scored, with closed outcome windows and a missing-indicator flag, measured on a real
 holdout.
 
@@ -58,14 +57,11 @@ filter — which would change what it is good for. First question for whoever bu
 
 ## 3. AI-assisted serving design
 
-_How the score actually reaches a rep or SDR manager in a way that changes their day.
-Explicitly not a per-account brief document and not a priority-tier / routing rule._
+Going back to the problem framing, at this point we don't understand how rep attention is allocated and how accounts are allocated. For this serving pilot I will aim for a solution that helps reps decide how to spend their time to allow them to focus on the tasks that add maximum value. 
 
-Going back to the problem framing, at this point we dont undertand how rep attention is allocated and how accounts are allocated. For this serving pilot i will aim for a solution that helps reps decide how to spend their time to allow them to focus on the tasks that add maximum value. 
+Given the lack of user/manager interviews at this point I will make the following assumption: Rep effort adds the most value where human judgment and interaction can materially influence a buying decision; AI should therefore reduce the surrounding research and administrative work so reps can spend more time on those moments.
 
-Given the lack of user/manager interviews at this point i will make the following asumption: Rep effort adds the most value where human judgment and interaction can materially influence a buying decision; AI should therefore reduce the surrounding research and administrative work so reps can spend more time on those moments.
-
-In the broader framing of the problem this isnt necesarily a model based solution, maby its workflow automation at a simpler level or simple segmentatios reps may not be using yet. But given the context of the challenge at this point i will explor a model + AI solution.
+In the broader framing of the problem this isn't necessarily a model-based solution, maybe it's workflow automation at a simpler level or simple segmentations reps may not be using yet. But given the context of the challenge at this point I will explore a model + AI solution.
 
 **What it does** (`serving/draft_outreach.py`). The score picks which accounts are worth
 drafting outreach for; an LLM writes the email; the rep approves, edits or rejects it. The
@@ -100,7 +96,7 @@ dependency.
 
 ## 4. Productionization and trust
 
-Explainability comes in the form of the aded scentence that picks the top driving features of the score and writes an explanation paragraph. Given that the email is validated before sending reps get a chance to intervene
-To stay current the model shoud be retrained periodically.
+Explainability comes in the form of the added sentence that picks the top driving features of the score and writes an explanation paragraph. Given that the email is validated before sending reps get a chance to intervene
+To stay current the model should be retrained periodically.
 
-Regadring the salesforce vs external issue, If the tool is primarily for reps (as in this example), Salesforce strongly favors adoption because it is already where they work, although we would need to understand the integration possibilities and associated costs. If it is mainly for managers, having it live as an external solution is less problematic, but it would still mean introducing a new tool they are not currently using, since the brief does not mention any existing visualization platform. If it is delivered as an email or Slack alert, it would also be much harder to measure whether it is actually being used and whether it is influencing decisions, because linking the alert to the action ultimately taken could be difficult or impossible.
+Regarding the Salesforce vs external issue, if the tool is primarily for reps (as in this example), Salesforce strongly favors adoption because it is already where they work, although we would need to understand the integration possibilities and associated costs. If it is mainly for managers, having it live as an external solution is less problematic, but it would still mean introducing a new tool they are not currently using, since the brief does not mention any existing visualization platform. If it is delivered as an email or Slack alert, it would also be much harder to measure whether it is actually being used and whether it is influencing decisions, because linking the alert to the action ultimately taken could be difficult or impossible.
