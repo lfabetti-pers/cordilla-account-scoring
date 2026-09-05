@@ -83,23 +83,18 @@ that approving beats writing from scratch; that the activity fields are accurate
 present; and that the score orders candidates well enough to be worth using — the weakest
 one, which is why the gates are ordinary code that holds whatever the model does.
 
-**How we would know it works.** Three layers, kept separate so a good number at one is
-never mistaken for success at another. **Technical:** conversion lift in the top K
-accounts, where K is real rep capacity — if reps can work 10% of the base, conversion in
-the top 10% by score over the overall rate. This cannot be computed today; no labeled
-holdout exists, which is the blocking dependency from section 2, and the pilot is what
-produces it. **Operational:** adoption (how many reps work the queue, and how much of it),
-acceptance versus rejection of suggestions, how much of an accepted draft gets rewritten,
-emails actually sent, and reply rate per hundred sends against the current cold baseline.
-Acceptance rate reads in week one and is the kill criterion: if reps reject or heavily
-rewrite most drafts the evidence is too thin and we stop, while what they edit tells us
-what is missing. **Business:** revenue per rep hour, the metric from section 1, since it
-captures economic impact rather than activity — tested as an A/B against a control group
-on the as-is process, with eligible accounts randomly withheld. Both halves must move:
-hours freed, and those hours spent on accounts that close better than reps pick unaided.
-Hours freed alone proves nothing. Separately, the assumption this rests on — that rep value
-sits in judgment rather than research and drafting — is validated in discovery, not by the
-pilot.
+**How we would know it works.** Three layers, kept separate. **Technical:** conversion
+lift in the top K accounts, where K is real rep capacity. It cannot be computed today — no
+labeled holdout exists, the blocking dependency from section 2 — and the pilot is what
+produces it. **Operational:** adoption, acceptance versus rejection of suggestions, how
+much of an accepted draft gets rewritten, emails actually sent, and reply rate per hundred
+sends. Acceptance rate reads in week one and is the kill criterion: if reps reject or
+heavily rewrite most drafts, the evidence is too thin and we stop. **Business:** revenue
+per rep hour, the metric from section 1, since it captures economic impact rather than
+activity. All three are read through an A/B test — a control group on the as-is process
+sets the baseline, eligible accounts randomly withheld — so the tool is separated from the
+rep. Both halves must move: hours freed, and those hours spent on accounts that close
+better than reps pick unaided.
 
 ## 4. Productionization and trust
 
