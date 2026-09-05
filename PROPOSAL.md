@@ -98,4 +98,7 @@ produces the labeled outcomes the audit named as a blocking dependency.
 _Explainability for a rep, what to trust vs. double-check, how it stays current, and
 the inside-Salesforce vs. outside-Salesforce tradeoff._
 
+Explainability comes in the form of the aded scentence that picks the top driving features of the score and writes an explanation paragraph. Given that the email is validated before sending reps get a chance to intervene
+To stay current the model shoud be retrained periodically.
 
+Regadring the salesforce vs external issue, If the tool is primarily for reps (as in this example), Salesforce strongly favors adoption because it is already where they work, although we would need to understand the integration possibilities and associated costs. If it is mainly for managers, having it live as an external solution is less problematic, but it would still mean introducing a new tool they are not currently using, since the brief does not mention any existing visualization platform. If it is delivered as an email or Slack alert, it would also be much harder to measure whether it is actually being used and whether it is influencing decisions, because linking the alert to the action ultimately taken could be difficult or impossible.
