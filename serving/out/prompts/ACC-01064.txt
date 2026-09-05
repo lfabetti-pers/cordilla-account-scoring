@@ -8,6 +8,11 @@ ACCOUNT
   segment: mid (50-250) company in Retail
   prior rep contacts: 5
 
+WHY THE SCORING MODEL SURFACED THIS ACCOUNT (the three features that moved its score most):
+  - intent score 62 — raises the score
+  - rep contacts so far = 5 — raises the score
+  - website visits = 0 — raises the score
+
 EVIDENCE YOU MAY REFERENCE (this is all we actually know):
   - started a trial and 1 of your people is using it
   - 1 person from your team asked us for something
@@ -20,7 +25,16 @@ YOU MAY NOT MENTION, HINT AT, OR ALLUDE TO:
   - their employee count or company size
 
 TASK
-Write a subject line and a body under 90 words, grounded only in the evidence above. Plain
+Two things.
+
+1. why_suggested: one or two plain sentences for the rep, telling them what made this
+account surface. Use the driver list above. Say it as a fact about the data we hold, not
+as a prediction — "this account has X and Y", never "this account is likely to buy".
+Drivers the rep may not repeat in the email are still fine to tell the rep about; say so
+where it matters. Do not use the word "score" or quote any number the model produced.
+
+2. The email: a subject line and a body under 90 words, grounded only in the EVIDENCE
+section — the drivers are context for the rep, not material for the email. Plain
 sentences, no exclamation marks, no invented facts about their business, no claims about
 their industry we cannot support. If the evidence will not carry a message that a real
 person would not resent receiving, return no_send instead of writing a weak email — an
@@ -29,6 +43,7 @@ unsent email costs us nothing and a bad one costs us the domain.
 Return JSON only:
 {"decision": "draft" | "no_send",
   "reason": "<short reason if no_send, else empty>",
+  "why_suggested": "<one or two sentences for the rep>",
   "subject": "<subject line>",
   "body": "<email body>",
   "evidence_used": ["<which evidence items the body actually rests on>"]}

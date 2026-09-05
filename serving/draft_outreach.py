@@ -118,6 +118,78 @@ def gate(referenceable, age_days):
     return "draft", "", age_days <= FRESH_DAYS
 
 
+PRETTY = {
+    "account_type": "relationship to Cordilla",
+    "employee_count": "company size",
+    "industry": "industry",
+    "intent_score": "third-party intent data",
+    "mql_count_90d": "marketing-qualified actions",
+    "trial_started": "trial signup",
+    "trial_active_users": "people using the trial",
+    "web_touchpoints_90d": "website visits",
+    "sales_contacts_90d": "rep contacts so far",
+}
+
+
+def attribute(model, candidates, reference):
+    """Which features push each candidate's score up or down, versus a typical account.
+
+    For each feature we re-score every candidate with that one value swapped to the batch's
+    typical value (median, or mode for categoricals) and keep the difference. It is a crude
+    attribution — features interact, and swapping one at a time ignores that — but it is
+    honest about what the model responded to, needs no extra library, and can be explained
+    to a rep in one sentence.
+
+    Note on intent_score: the typical value is the median across accounts that *have*
+    coverage, so for an uncovered account this measures the cost of having no intent data
+    at all. Per the audit that is the single strongest signal in the dataset, and the one
+    the pipeline destroys by imputing it before training.
+
+    This explains the MODEL, not the world. It answers "why did this account surface",
+    never "why will this account convert".
+    """
+    typical = {}
+    for f in FEATURES:
+        col = reference[f]
+        typical[f] = col.mode()[0] if col.dtype == object else col.median()
+
+    base = model.predict_proba(candidates[FEATURES])[:, 1]
+    deltas = pd.DataFrame(index=candidates.index)
+    for f in FEATURES:
+        swapped = candidates.copy()
+        swapped[f] = typical[f]
+        deltas[f] = base - model.predict_proba(swapped[FEATURES])[:, 1]
+    return deltas
+
+
+def describe_value(row, feature):
+    """The account's actual value for a feature, phrased for a rep rather than a schema."""
+    v = getattr(row, feature)
+    if feature == "intent_score":
+        return f"intent score {v:.0f}" if pd.notna(v) else "no intent data at all"
+    if feature == "trial_started":
+        return "started a trial" if v == 1 else "no trial"
+    if feature == "account_type":
+        return str(v)
+    if feature == "industry":
+        return str(v)
+    return f"{PRETTY[feature]} = {int(v)}"
+
+
+def top_drivers(row, account_deltas, k=3):
+    """The k features that moved this account's score most, with direction and value."""
+    ranked = account_deltas.reindex(account_deltas.abs().sort_values(ascending=False).index)
+    out = []
+    for feature, delta in ranked.head(k).items():
+        out.append({
+            "feature": PRETTY[feature],
+            "value": describe_value(row, feature),
+            "direction": "raises" if delta > 0 else "lowers",
+            "effect": round(float(delta), 4),
+        })
+    return out
+
+
 def build_prompt(payload):
     """The prompt a live model would receive. Rendered here so it can be read and argued with."""
     recency = (
@@ -136,6 +208,9 @@ ACCOUNT
   segment: {payload['size_band']} company in {payload['industry']}
   prior rep contacts: {payload['prior_contacts']}
 
+WHY THE SCORING MODEL SURFACED THIS ACCOUNT (the three features that moved its score most):
+{chr(10).join('  - ' + d['value'] + ' — ' + d['direction'] + ' the score' for d in payload['top_drivers'])}
+
 EVIDENCE YOU MAY REFERENCE (this is all we actually know):
 {chr(10).join('  - ' + e for e in payload['referenceable_evidence'])}
 
@@ -145,7 +220,16 @@ YOU MAY NOT MENTION, HINT AT, OR ALLUDE TO:
 {chr(10).join('  - ' + c for c in payload['forbidden_claims'])}
 
 TASK
-Write a subject line and a body under 90 words, grounded only in the evidence above. Plain
+Two things.
+
+1. why_suggested: one or two plain sentences for the rep, telling them what made this
+account surface. Use the driver list above. Say it as a fact about the data we hold, not
+as a prediction — "this account has X and Y", never "this account is likely to buy".
+Drivers the rep may not repeat in the email are still fine to tell the rep about; say so
+where it matters. Do not use the word "score" or quote any number the model produced.
+
+2. The email: a subject line and a body under 90 words, grounded only in the EVIDENCE
+section — the drivers are context for the rep, not material for the email. Plain
 sentences, no exclamation marks, no invented facts about their business, no claims about
 their industry we cannot support. If the evidence will not carry a message that a real
 person would not resent receiving, return no_send instead of writing a weak email — an
@@ -154,6 +238,7 @@ unsent email costs us nothing and a bad one costs us the domain.
 Return JSON only:
 {{"decision": "draft" | "no_send",
   "reason": "<short reason if no_send, else empty>",
+  "why_suggested": "<one or two sentences for the rep>",
   "subject": "<subject line>",
   "body": "<email body>",
   "evidence_used": ["<which evidence items the body actually rests on>"]}}"""
@@ -186,6 +271,15 @@ def generate_opener(payload):
         # -----------------------------------------------------------------------------
 
     # Fallback: same schema, no network. Mirrors the prompt's rules mechanically.
+    drivers = payload["top_drivers"]
+    up = [d["value"] for d in drivers if d["direction"] == "raises"]
+    down = [d["value"] for d in drivers if d["direction"] == "lowers"]
+    why = "This account surfaced on " + (", ".join(up) if up else "no strong signal") + "."
+    if down:
+        why += " Working against it: " + ", ".join(down) + "."
+    if any("intent" in d["feature"] or "website" in d["feature"] for d in drivers):
+        why += " Some of that is vendor and web data you can act on but should not quote back to them."
+
     lead = payload["referenceable_evidence"][0]
     opener = "I saw that you" if payload["allow_recency"] else "our records show you"
     greeting = "Picking this back up — " if payload["prior_contacts"] > 0 else ""
@@ -200,6 +294,7 @@ def generate_opener(payload):
     return {
         "decision": "draft",
         "reason": "",
+        "why_suggested": why,
         "subject": f"Quick question about your {payload['industry'].lower()} workflows",
         "body": body,
         "evidence_used": [lead],
@@ -236,13 +331,18 @@ def main():
     for stale in (OUT / "prompts").glob("*.txt"):  # don't leave last run's prompts behind
         stale.unlink()
 
+    # Why each candidate surfaced. Computed for declined accounts too — "the model liked
+    # this one for intent coverage we cannot mention" is exactly what a rep should see.
+    deltas = attribute(model, candidates, df)
+
     rows = []
     for row in candidates.itertuples():
         referenceable, internal_only = build_evidence(row)
         decision, reason, allow_recency = gate(referenceable, row.snapshot_age_days)
+        drivers = top_drivers(row, deltas.loc[row.Index])
 
-        result = {"decision": decision, "reason": reason, "subject": "", "body": "",
-                  "evidence_used": [], "source": "gate"}
+        result = {"decision": decision, "reason": reason, "why_suggested": "", "subject": "",
+                  "body": "", "evidence_used": [], "source": "gate"}
         if decision == "draft":
             payload = {
                 "account_id": row.account_id,
@@ -254,6 +354,7 @@ def main():
                 "forbidden_claims": FORBIDDEN_CLAIMS,
                 "allow_recency": allow_recency,
                 "snapshot_age_days": int(row.snapshot_age_days),
+                "top_drivers": drivers,
             }
             (OUT / "prompts" / f"{row.account_id}.txt").write_text(build_prompt(payload))
             result = generate_opener(payload)
@@ -263,6 +364,10 @@ def main():
             "account_id": row.account_id,
             "decision": result["decision"],
             "reason": result["reason"],
+            "why_suggested": result.get("why_suggested", ""),
+            "top_drivers": " | ".join(
+                f"{d['value']} ({d['direction']})" for d in drivers
+            ),
             "subject": result["subject"],
             "body": result["body"],
             "evidence_used": " | ".join(result.get("evidence_used", [])),
@@ -294,6 +399,12 @@ def main():
         "wrong even where its ordering may hold. Judging whether a draft is worth sending "
         "is the part that needs you.",
         "",
+        "**Reading \"why it surfaced\".** Each account lists the three features that moved "
+        "its score most, found by re-scoring the account with one feature swapped to a "
+        "typical value and seeing what changed. That explains *the model*, not the "
+        "customer: it says what our data has on them, never that they are going to buy. "
+        "Trust it as a description of the inputs, and treat the conclusion as yours.",
+        "",
         "---",
         "",
         f"## Drafts ({len(drafts)})",
@@ -302,7 +413,9 @@ def main():
     for r in drafts.itertuples():
         md += [
             f"### {r.account_id} · {r.snapshot_age_days}d-old snapshot",
-            f"**Rests on:** {r.evidence_used or r.referenceable_evidence}  ",
+            f"**Why it surfaced:** {r.why_suggested}  ",
+            f"**Top 3 things that moved it:** {r.top_drivers}  ",
+            f"**The email rests on:** {r.evidence_used or r.referenceable_evidence}  ",
             f"**Known but not said:** {r.internal_only}",
             "",
             f"**Subject:** {r.subject}",
@@ -315,8 +428,10 @@ def main():
     if len(declined):
         md += ["We had nothing true to say to these, so no email was written.", ""]
         for reason, grp in declined.groupby(declined.reason.str.split(" (", regex=False).str[0]):
-            md += [f"**{reason}** — {len(grp)} accounts", "",
-                   "> " + ", ".join(grp.account_id.tolist()), ""]
+            md += [f"**{reason}** — {len(grp)} accounts", ""]
+            for r in grp.itertuples():
+                md += [f"- `{r.account_id}` — surfaced on {r.top_drivers}"]
+            md += [""]
     md += [
         "A high score with no referenceable evidence is the system working, not failing. "
         "It means the model likes an account for reasons we cannot put in an email — "
