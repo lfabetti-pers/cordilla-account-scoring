@@ -788,3 +788,61 @@ the one the pipeline destroys by median-imputing before training. This is the mo
 compact statement of the audit's case — the problem is the training material, not the
 algorithm. There was very little here for any model to learn, and the most usable piece
 was discarded before learning began.
+
+---
+
+## Entry 25 — Serving prototype: how the design was chosen, built and tested
+
+**Date:** 2026-09-05
+
+**The constraint that drove everything.** The brief rules out a per-account brief, a
+priority tier or routing rule, and a score in a list. All three are things a rep *reads*.
+The move that resolved it was to build something a rep **acts on** instead — an artifact
+awaiting approval sits outside the excluded set by construction.
+
+**Candidates considered and dropped.** Several designs were worked through before that
+was clear: grouping the batch into "plays" by what drives each score; a disagreement queue
+comparing the model's ranking against what reps had already worked; a batch-level summary
+of which features move scores. Each was rejected on the same test, raised as a challenge
+during the session — *why is the score relevant here, couldn't we just sort by variables?*
+It was correct, and the honest answer was that in those designs the model was decoration:
+the groups came from rules over the features and a `GROUP BY` would produce them. On this
+data that is not only a design flaw. With only two of nine variables clearing sampling
+noise (Entry 24), a model cannot be doing much a sort cannot.
+
+**Where AI reasoning was overridden.** The assistant's proposals kept the score in a
+decorative role while presenting them as model-driven. Two counterfactual designs were
+then offered — rescoring each account with one added rep contact, and with recent activity
+stripped — which do make the model load-bearing (responsiveness and score are uncorrelated
+here, −0.007, with zero overlap in their top tens). Both were rejected as too complex for
+the deliverable. The direction that stuck came from the product side: use AI to draft the
+outreach itself and let the rep's judgment decide whether it is worth sending, since
+judgment is where a rep adds value and drafting is not.
+
+**The objection to that, and the fix.** Cordilla holds nine numeric fields per account and
+no company name, contact or notes, so drafting for everyone produces a mail merge — which
+at under-1% conversion burns the sending domain. The fix is that the system must know when
+it has nothing to say. Two deterministic gates: an account needs evidence a human would
+recognise (a trial they started, a request from their team, a past relationship), and that
+evidence must be recent enough to still be true. Our own rep contacts were deliberately
+excluded as evidence, since treating our activity as a buying signal repeats the
+circularity from Entry 20. On the 300 accounts this declines 34 of the top 60 — 17 with
+nothing sayable, 17 with evidence over 180 days old. The refusals are the product.
+
+**Built** as `serving/draft_outreach.py`: score once, gate, one LLM call per surviving
+candidate (with a documented template fallback, since no API key was available), and a
+rep-facing approval queue. Per-account explainability was added afterwards — the three
+features that moved each score, found by re-scoring with one feature swapped to typical.
+
+**What testing caught.** Running it, rather than reading it, found four real defects. The
+first version counted rep contacts as referenceable evidence, producing drafts justified
+by "we called you four times" — the audit's circularity leaking into the product. The
+template produced ungrammatical prose. A prose-wrapped or malformed model reply crashed
+the live path, which matters because models commonly wrap JSON in text. And a set
+`ANTHROPIC_API_KEY` crashed on a missing import, since `anthropic` is deliberately not
+pinned. The live path was then exercised offline with stub modules returning a normal
+reply, a refusal, wrapped JSON and broken JSON.
+
+**One check that mattered more than the rest:** with a stubbed model refusing every
+candidate, the gate counts were unchanged. The refusals are ordinary code, not prompt
+instructions, so a model can add refusals but never overturn one.
