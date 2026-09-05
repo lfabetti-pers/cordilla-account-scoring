@@ -98,18 +98,14 @@ that approving beats writing from scratch; that the activity fields are accurate
 present; and that the score orders candidates well enough to be worth using — the weakest
 one, which is why the gates are ordinary code that holds whatever the model does.
 
-**How we would know it works.** Three layers, kept separate. **Technical:** conversion
-lift in the top K accounts, where K is real rep capacity. It cannot be computed today — no
-labeled holdout exists, the blocking dependency from section 2 — and the pilot is what
-produces it. **Operational:** adoption, acceptance versus rejection of suggestions, how
-much of an accepted draft gets rewritten, emails actually sent, and reply rate per hundred
-sends. Acceptance rate reads in week one and is the kill criterion: if reps reject or
-heavily rewrite most drafts, the evidence is too thin and we stop. **Business:** revenue
-per rep hour, the metric from section 1, since it captures economic impact rather than
-activity. All three are read through an A/B test — a control group on the as-is process
-sets the baseline, eligible accounts randomly withheld — so the tool is separated from the
-rep. Both halves must move: hours freed, and those hours spent on accounts that close
-better than reps pick unaided.
+**How we would know it works.** Three metrics, kept separate. **Technical:** conversion
+lift in the top K accounts, K being real rep capacity — not computable today, since no
+labeled holdout exists; the pilot is what produces it. **Operational:** adoption, drafts
+accepted versus rejected, emails actually sent. Acceptance rate is the kill criterion: if
+reps reject or heavily rewrite most drafts, the evidence is too thin and we stop.
+**Business:** revenue per rep hour, from section 1. All three are read against an A/B test,
+with a control group on the as-is process as baseline, so we measure the tool rather than
+the rep.
 
 ## 4. Productionization and trust
 
