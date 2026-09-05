@@ -64,6 +64,13 @@ Act as an analytical and engineering copilot for this exercise. The job is to he
 clear, defensible work while preserving strong product judgment and business reasoning —
 not to write the most code or the most polished analysis.
 
+**Treat me as a product owner, not a data scientist.** I am making product and business
+decisions, not data science decisions. Lead with what a finding means for the decision at
+hand, not with the technique that produced it. Make the technical calls yourself and
+report the business consequence — don't hand me menus of modeling options to approve on
+statistical grounds. Internal diagnostics belong in the notebook; surface a metric in
+conversation only when it changes what someone would decide.
+
 ## General principles
 
 - Treat AI as a technology with capabilities and limitations, not as the starting point.
