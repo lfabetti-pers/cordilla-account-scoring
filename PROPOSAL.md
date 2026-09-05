@@ -87,16 +87,18 @@ that approving beats writing from scratch; that the activity fields are accurate
 present; and that the score orders candidates well enough to be worth using — the weakest
 one, which is why the gates are ordinary code that holds whatever the model does.
 
-**How we would know.** Approval rate reads in week one: if reps reject or rewrite most
-drafts, the evidence is too thin and we stop. What they edit says what's missing. Then
-reply rate per hundred sends against the current cold baseline, and meetings per rep hour.
-Withholding a random share of eligible accounts gives a control group — and that pilot
-produces the labeled outcomes the audit named as a blocking dependency.
+**How we would know.** The metric that decides it is the one named in section 1:
+**revenue per rep hour**. This solution only moves it by freeing hours that reps then spend
+on accounts that convert, so both halves have to be measured — hours returned per rep per
+week, and whether the queue's accounts close better than what reps pick unaided. Two
+leading indicators arrive first. Approval rate reads in week one: if reps reject or rewrite
+most drafts, the evidence is too thin and we stop, and what they edit says what's missing.
+Reply rate per hundred sends against the current cold baseline follows. Withholding a
+random share of eligible accounts gives the control group that separates the tool from the
+rep — and that same pilot produces the labeled outcomes the audit named as a blocking
+dependency.
 
 ## 4. Productionization and trust
-
-_Explainability for a rep, what to trust vs. double-check, how it stays current, and
-the inside-Salesforce vs. outside-Salesforce tradeoff._
 
 Explainability comes in the form of the aded scentence that picks the top driving features of the score and writes an explanation paragraph. Given that the email is validated before sending reps get a chance to intervene
 To stay current the model shoud be retrained periodically.
