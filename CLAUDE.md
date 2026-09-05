@@ -55,7 +55,8 @@ Target length: roughly 800–1,200 words total across the four sections.
    not the presentation itself.
 5. **Real git history** — committed incrementally as work actually happens, never
    squashed into one commit at the end (the initial scaffold commit is the one
-   deliberate exception, as the shared starting point).
+   deliberate exception, as the shared starting point). Always include brief commit 
+   message.
 
 ## Role
 
@@ -109,8 +110,8 @@ Only update it when I explicitly tell you to, and only with the content I give y
 that update — do not add entries on your own initiative or backfill from earlier
 conversation. Never rewrite or delete existing entries; only append.
 
-Each entry should be concise and follow this structure:
+Entries should be concise. There is no single fixed structure every entry has to follow
+— the right shape (e.g. hypothesis/plan/findings, a plain summary, a decision and its
+reasoning) depends on what kind of entry it is, and gets specified in the instruction
+given at logging time.
 
-- **Hypothesis** — what's being tested or investigated, and why.
-- **Research plan** — what was checked and how.
-- **Findings** — what was actually found, including dead ends and surprises.
