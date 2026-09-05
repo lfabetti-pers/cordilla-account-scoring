@@ -846,3 +846,109 @@ reply, a refusal, wrapped JSON and broken JSON.
 **One check that mattered more than the rest:** with a stubbed model refusing every
 candidate, the gate counts were unchanged. The refusals are ordinary code, not prompt
 instructions, so a model can add refusals but never overturn one.
+
+---
+
+## Entry 26 — Final consolidation: what we'd stand behind in the room
+
+**Date:** 2026-09-05
+
+Pulling together the framing, the numbers, the hypotheses and the assumptions. This is
+raw material, not a presentation. Everything here is a **first proposal built on two
+static CSVs and no access to the people who use the system** — the open questions in
+`OPEN-QUESTIONS.md` are not tidy-up items, they are conditions the proposal depends on.
+
+### The real problem, as we framed it
+
+The ask was "a dashboard so reps stop guessing which accounts to call." We did not accept
+that as the problem. Two questions sit underneath it: *are reps actually guessing*, and
+*why would that be a problem?* Our answer to the second is what reframed the work: the
+account universe (tens of thousands of noncustomers) is far larger than reps can cover, so
+the scarce resource is **rep attention, not accounts**. That gives the real question:
+
+> Given limited rep capacity, which accounts should receive human sales attention now, and
+> where will that attention create the most value?
+
+Three consequences followed. First, a dashboard is a solution to a different problem —
+ranking accounts does not by itself change how an hour of rep time gets spent. Second,
+conversion propensity is **useful but not sufficient**: it conflates "will convert anyway"
+with "needs a nudge," and ignores deal size entirely, while the commercial goal is ARR
+rather than conversion count. `converted_within_90d` is a proxy for value, not value.
+Third, the highest-value rep work is where human judgment and interaction can move a
+buying decision — qualification, conversations, objection handling — while research, list
+sorting and CRM admin are candidates for automation. That last point is a **hypothesis, not
+a finding**, and it is the single assumption the serving design rests on.
+
+### What we still don't know, and would ask first
+
+We never learned how accounts are assigned, how reps choose today, or whether the existing
+vendor data is used at all — so we cannot yet say whether this belongs to reps, to their
+managers, or both. The interview list is in `OPEN-QUESTIONS.md`: who operates the marketing
+automation platform, what the intent vendor data is actually used for and by whom, how the
+external sources integrate into the workflow, and who watches trial usage and what they do
+about it. Alongside those sit the three framing questions we deliberately left open
+(Entry 7): are reps really guessing, where does an additional hour create the most value,
+and is propensity the right signal or does the decision need something closer to uplift.
+
+### Model audit: what we found
+
+**We would not ship these scores.** The defects are in the data, not the algorithm.
+
+- **It cannot be validated.** No holdout exists — `training_data.csv` is what the model was
+  fit on, `accounts_to_score.csv` is unlabeled. A separated labeled test set is a blocking
+  dependency before any performance claim.
+- **Wrong population.** Trained on data converting at 6.5% against a real-world rate well
+  under 1% for cold accounts; 59.4% of its accounts had already been contacted by a rep in
+  an account base described as mostly untouched. Selection, not drift — conversion and
+  vendor coverage are flat across the two years the data spans.
+- **8.6% of labels are false by construction.** 103 accounts whose 90-day window had not
+  closed by 2026-08-01 are recorded at exactly 0.0% conversion, against 5.6–8.1% elsewhere.
+  True base rate among resolvable rows is 7.11%, not the 6.50% the model was fit on.
+- **Its best signal was destroyed before training.** Intent-vendor coverage separates 8.2%
+  from 3.9% conversion and holds inside every size quartile, but all 482 blanks became the
+  median (25.3) at fit time, so the classifier never could distinguish "middling intent"
+  from "no coverage."
+- **There was little to learn from.** Only two of nine variables clear sampling noise, and
+  one of them (`sales_contacts_90d`) records rep action inside the outcome window, so it
+  cannot tell us who to call next without assuming the answer.
+
+**Next step is not retraining, it is rebuilding the dataset:** a sample drawn from the
+population reps actually work, outcome windows that have closed, missing-indicator flags
+instead of imputation, snapshot age as a feature, and a real holdout. One open question
+first, for whoever built it: the population may have been *deliberately* narrowed rather
+than badly sampled, which would make this a second-stage model and change what it is for.
+
+### What we built, and why that shape
+
+`serving/draft_outreach.py`. The score selects which accounts are worth drafting outreach
+for; an LLM writes the email; the rep approves, edits or rejects. The score never reaches
+the rep, and each draft carries the three features that moved it plus a plain sentence on
+why it surfaced.
+
+We chose it because it follows directly from the framing: if rep value lives in judgment
+and interaction, the right intervention removes the drafting work and leaves the judgment
+call — approving or rejecting — with the person. **The product is the refusal.** With nine
+numeric fields and no company name, contact or notes, drafting for everyone is a mail
+merge, so the system writes only where we hold something a person would recognise and only
+while it is recent enough to still be true. On the 300 accounts that declines 34 of the top
+60 (17 with nothing sayable, 17 with evidence over 180 days old) and names which — turning
+a high score with no usable evidence into a call to make rather than an email to send. The
+gates are ordinary code, so they hold whatever the model does and survive it being retired.
+
+### How we would test it
+
+The metric is the one from the framing: **revenue per rep hour**. The chain has two halves
+and both must be measured — hours returned per rep per week, and whether the queue's
+accounts close better than what reps pick unaided. Approval rate reads in week one and is
+the kill criterion: if reps reject or heavily rewrite most drafts, the evidence is too thin
+and we stop. What they edit tells us what is missing. Reply rate per hundred sends against
+the current cold baseline follows. Withholding a random share of eligible accounts gives
+the control group that separates the tool from the rep — and that same pilot produces the
+labeled outcomes the audit named as a blocking dependency.
+
+### The honest summary
+
+We inherited an unvalidated model trained on the wrong population with broken labels, and
+a request for a dashboard nobody had justified. What we are proposing is a small, reversible
+pilot that buys two things at once: some rep capacity back, and the labeled data that would
+let anyone answer the question the model cannot currently answer for itself.
