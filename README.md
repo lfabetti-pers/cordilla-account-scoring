@@ -29,6 +29,37 @@ Expected feature columns, in the order the model was trained on: `account_type`,
 - `PROPOSAL.md`, your written design proposal (see the take-home packet for the required sections).
 - `RESEARCH-LOG.md`, your running log as you work: hypotheses, what you tried, dead ends, and specifically what you asked your AI tool and how you used what came back.
 
+## Running the work in this repo
+
+**Model audit** — `audit/model_data_audit.ipynb`. Open it and run top to bottom; it needs
+`requirements-notebook.txt`. Findings and verdicts are written up inline.
+
+**Serving step** — `serving/draft_outreach.py`:
+
+    python serving/draft_outreach.py [--top-n 60]
+
+Scores all 300 accounts in `data/accounts_to_score.csv`, takes the highest-scoring
+`--top-n` as candidates, and for each one either drafts an outreach email for a rep to
+approve or refuses to draft and records why. On the default run: 26 drafts, 34 declines.
+
+It writes three things to `serving/out/`:
+
+- `outreach_queue.md` — the rep-facing queue. Each draft shows why the account surfaced,
+  the three features that moved its score, the evidence the email rests on, what we know
+  but must not say, and an approve / edit / reject line. Then the declined accounts,
+  grouped by reason. The model's score appears nowhere in it.
+- `outreach_queue.csv` — the same as data, plus the score, for our own analysis.
+- `prompts/<account_id>.txt` — the exact prompt that account would send to the LLM.
+
+**The LLM call** is `generate_opener()`, one call per candidate. With `ANTHROPIC_API_KEY`
+set it calls the Messages API (`pip install anthropic`, deliberately not pinned in
+`requirements.txt` since the script runs without it). Without a key it falls back to a
+deterministic template filling the same JSON schema, labelled `source=template` throughout
+so template prose is never mistaken for a model's. The refusal gates are ordinary Python,
+not prompt instructions — a model can add refusals but cannot overturn one.
+
+See the docstring at the top of the script for why the design is shaped this way.
+
 ## Working process
 
 Commit as you actually go, small, real commits over time, not one commit at the end. We read the commit history as part of how you reason and work, not just the final diff.
