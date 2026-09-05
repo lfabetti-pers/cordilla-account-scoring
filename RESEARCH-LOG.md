@@ -106,8 +106,8 @@ How does a rep today choose who to call, or where to allocate their time?
 
 I assume some SDR manager, or the system itself, assigns them a list of accounts with
 account info to call. This particular investigation is scoped to the SDRs' tasks, leaving 
-whatever happens upstream as an open question for later. We will explore the SDRs tasks,
-decisions and workflows first to guide the discovery and leave the question of wether the
+whatever happens upstream as an open question for later. We will explore the SDRs' tasks,
+decisions and workflows first to guide the discovery and leave the question of whether the
 SDR managers and their decisions should be considered for later (or as next steps depending
 in time)
 
@@ -115,7 +115,7 @@ in time)
 
 - A rep takes a list of accounts assigned to them in Salesforce.
 - Segments it in some way (or not — maybe this is the first point to tackle) and
-  prioritizes it (or not). We asume they do and will try to test this in audit
+  prioritizes it (or not). We assume they do and will try to test this in audit
 - Then goes account by account, reviewing the available info to plan the contact.
 - Makes contact via email or call.
 - Records the outcome.
@@ -167,7 +167,7 @@ may be useful, but it may not be sufficient for the business decision.
 Assuming the ultimate commercial goal is to maximize ARR, the investigation should
 determine whether conversion propensity provides enough information to support the
 attention-allocation decision, or whether Cordilla needs a different signal, workflow, or
-decision framework. Maby a solution that allows reps to understand at what point in the
+decision framework. Maybe a solution that allows reps to understand at what point in the
 conversion funnel a lead is, so they can better time their efforts.
 
 **Summary.** The real constraint is rep time — scarce human attention, not a shortage of
@@ -195,7 +195,7 @@ this prompt."
 
 - **Are reps really guessing?** Hypothesis: Probably not fully — more likely an informal heuristic
   (recency, company size, visible marketing activity) rather than a validated one. To be
-  checked in discovery. Probably cant answer this from the provided data, maby by chcking
+  checked in discovery. Probably can't answer this from the provided data, maybe by checking
   correlation of sales_contacts_90d with other variables.
 - **Where does an hour of rep time create the most value?** Hypothesis:Not the highest-propensity
   accounts (may convert anyway) or the coldest ones (unmovable) — value likely
@@ -272,32 +272,30 @@ further effort is justified. The model alone, though, is probably not enough to 
 the rep-time-allocation problem, since it isn't enough on its own to determine the
 next-best-action for reps.
 
-## Entry 10: model framin analysis 
+## Entry 10: model framing analysis 
 
 I will now work on the data and model audit to try to determine if the model has any value for our rep time allocation problem, if it is trustworthy and if its performance justifies further efforts on it.
 
-To solve the rep allocation problem two questions should be ansewred: which accounts should they focus on at each given time and what is the next best action?
+To solve the rep allocation problem two questions should be answered: which accounts should they focus on at each given time and what is the next best action?
 
-A model that calculates conversion likelyhood can defifnitely help to direct attention, the pending question would be which of these accounts eed human attention and which dont. Maby the data has a hit to offer on this.
+A model that calculates conversion likelihood can definitely help to direct attention, the pending question would be which of these accounts need human attention and which don't. Maybe the data has a hint to offer on this.
 
 The first question is what decision would be affected by the use of the model and who makes that decision now and how.
-At this point we dont really know how accounts are assigned to reps (this is a pending question for user interviews), so we cant determine yet if the model would be used by reps, their managers or both. We dont fully understand how the decision of which accounts to pay attention to is made (we dont know how sales uses the data) so at this point we can only determine if a model has value as an attention driving mechanism or not. The actual use should be determined later, though an assumption will be made to propose a first pilot if the case comes.
+At this point we don't really know how accounts are assigned to reps (this is a pending question for user interviews), so we can't determine yet if the model would be used by reps, their managers or both. We don't fully understand how the decision of which accounts to pay attention to is made (we don't know how sales uses the data) so at this point we can only determine if a model has value as an attention driving mechanism or not. The actual use should be determined later, though an assumption will be made to propose a first pilot if the case comes.
 
 Now we will audit the model to frame it generally and see if further efforts are justified. Some research questions are:
-- performance: general and across segments (should the model be trusted equally on all accounts or is it more valuable fore some?)
+- performance: general and across segments (should the model be trusted equally on all accounts or is it more valuable for some?)
 - check for data leakage: if the objective is to score cold accounts, already contacted accounts should be left out of the dataset
 - Check for selection bias in the dataset
 - check variable correlation to target
-- is it still usefull as it is? my first guess would me no. How old is training data? it should probably be retrained as signals may have changed as well as data distributions (data drift) which is probably what killed the first model in teh first place. COmpare training data distribution with data of accounts to score.
-- does he model beat basic heuristics?
-- 
+- is it still useful as it is? my first guess would be no. How old is training data? it should probably be retrained as signals may have changed as well as data distributions (data drift) which is probably what killed the first model in the first place. Compare training data distribution with data of accounts to score.
+- does the model beat basic heuristics?
 
+A conceptual question to be answer further down is how much effort does it take to consolidate this dataset? data sources are varied and probably not integrated. Also maybe simpler solutions are not being explored, maybe data is not being used at all to prioritize accounts.
 
-A conceptual question to be answer further down is how much effort does it take to consolidate this dataset? data sources are varied and probably not integrated. Also maby simpler solutions are not being explored, maby data is not being used at all to prioritize accounts.
+How would we know if the model works? at this point we should separate technical metrics from operational metrics and business metrics. For the model itself the best metric would probably be conversion lift in the K ranked accounts (where K reflects reps capacity). So if reps can only work 10% of accounts, the metric would be conversion rate in the top 10% by score / overall conversion rate.
 
-How would we know if the model works? at this point we should separate technical metrics from operational metrics and busniness metrics. For the model itself the best metric would probably be conversion lift in the K ranked accounts (where K reflects reps capacity). So if reps can only work 10% of accounts, the metric would be conversion rate in the top 10% by score / overall conversion rate.
-
-Once deployed the best buiness KPI could be revenue per rep hour as it directly reflects model usage impact on economic results. This should be tested in an A/B scenario establishing a baseline with users using the As-Is process and another group using the new model driven process.
+Once deployed the best business KPI could be revenue per rep hour as it directly reflects model usage impact on economic results. This should be tested in an A/B scenario establishing a baseline with users using the As-Is process and another group using the new model driven process.
 
 Important observation: What does converted_within_90d actually capture? It's a count/binary of conversion, not revenue. If deal sizes vary a lot, a model optimized for conversion probability could systematically undervalue high-ARR accounts — worth checking if any value/size field exists to sanity-check this gap, even informally.
 
