@@ -9,8 +9,21 @@ comes to mind.
 
 ## Core questions (current focus)
 
-- [ ] Are reps actually guessing today, or is there already some prioritization or
-      segmentation logic in place? maby there are other signals we are not capitalizing
+- [ ] Are reps actually guessing today?
 - [ ] Where does an additional hour of rep time create the most value?
 - [ ] About the model: Is conversion propensity actually the right signal for allocating
       rep attention, or does the decision need something closer to incremental value (uplift) that propensity alone doesn't capture?
+
+## Questions for user/team interviews
+
+- [ ] Who operates the marketing automation platform — reps or managers? What do they
+      actually do with it?
+- [ ] What is the third-party intent vendor data used for, and by whom?
+- [ ] How does data from external sources (intent vendor, firmographic/technographic
+      enrichment vendor, web/ad attribution vendor) and internal usage telemetry
+      integrate into the workflow?
+- [ ] Who monitors trial usage data (assumption: managers)? What decision is made based
+      on it?
+
+## Model questions
+- [ ] What does converted_within_90d actually capture? It's a count/binary of conversion, not revenue. If deal sizes vary a lot, a model optimized for conversion probability could systematically undervalue high-ARR accounts — worth checking if any value/size field exists to sanity-check this gap, even informally.

@@ -217,3 +217,118 @@ hour of rep time create the most value, is conversion propensity the right signa
 open for now rather than resolving them further at this stage. Moving next into
 auditing the model and data directly, to see what insight that turns up before coming
 back to these.
+
+---
+
+## Entry 8 — Key questions for user/team interviews
+
+**Date:** 2026-09-05
+
+Logging a set of questions that can't be resolved from the provided files alone and
+should be put directly to the user and team in discovery:
+
+- Who operates the marketing automation platform — reps or managers? What do they
+  actually do with it?
+- What is the third-party intent vendor data used for, and by whom?
+- How does data from external sources (intent vendor, firmographic/technographic
+  enrichment vendor, web/ad attribution vendor) and internal usage telemetry integrate
+  into the workflow?
+- Who monitors trial usage data (assumption: managers)? What decision is made based on
+  it?
+
+---
+
+## Entry 9 — Summary: base question, model's role, and the audit question
+
+**Date:** 2026-09-05
+
+The base question here is how to best allocate rep time to maximize business value. This
+can be framed as: "Given limited rep capacity, which accounts should receive human sales
+attention now, and where will that attention create the most value?"
+
+For this exercise, `converted_within_90d` gives us a measurable proxy for commercial
+value, but it is only a proxy. The model predicts likelihood of conversion, not the
+incremental effect of a rep contacting an account. So the model should be evaluated as a
+tool for better allocation of rep attention, not as proof that contacting a high-scoring
+account causes conversion.
+
+**Working hypothesis:** if the model can reliably identify parts of the account base
+where conversions are concentrated, and AI can reduce the low-value work required to act
+on those opportunities, Cordilla can generate more commercial output from the same rep
+capacity.
+
+That leads directly to the audit question:
+
+**Is this model trustworthy enough, and in which situations, to influence how reps
+allocate their limited attention?**
+
+**Observation:** we don't currently know how all the available data is used by the
+teams (if it's used at all) — this should be addressed with user interviews and deeper
+workflow analysis as part of next steps.
+
+Given what we know at this point, and considering that a propensity model was very
+promising in the past, it's worth investigating what this model can tell us and whether
+further effort is justified. The model alone, though, is probably not enough to solve
+the rep-time-allocation problem, since it isn't enough on its own to determine the
+next-best-action for reps.
+
+## Entry 10: model framin analysis 
+
+I will now work on the data and model audit to try to determine if the model has any value for our rep time allocation problem, if it is trustworthy and if its performance justifies further efforts on it.
+
+To solve the rep allocation problem two questions should be ansewred: which accounts should they focus on at each given time and what is the next best action?
+
+A model that calculates conversion likelyhood can defifnitely help to direct attention, the pending question would be which of these accounts eed human attention and which dont. Maby the data has a hit to offer on this.
+
+The first question is what decision would be affected by the use of the model and who makes that decision now and how.
+At this point we dont really know how accounts are assigned to reps (this is a pending question for user interviews), so we cant determine yet if the model would be used by reps, their managers or both. We dont fully understand how the decision of which accounts to pay attention to is made (we dont know how sales uses the data) so at this point we can only determine if a model has value as an attention driving mechanism or not. The actual use should be determined later, though an assumption will be made to propose a first pilot if the case comes.
+
+Now we will audit the model to frame it generally and see if further efforts are justified. Some research questions are:
+- performance: general and across segments (should the model be trusted equally on all accounts or is it more valuable fore some?)
+- check for data leakage: if the objective is to score cold accounts, already contacted accounts should be left out of the dataset
+- Check for selection bias in the dataset
+- check variable correlation to target
+- is it still usefull as it is? my first guess would me no. How old is training data? it should probably be retrained as signals may have changed as well as data distributions (data drift) which is probably what killed the first model in teh first place. COmpare training data distribution with data of accounts to score.
+- does he model beat basic heuristics?
+- 
+
+
+A conceptual question to be answer further down is how much effort does it take to consolidate this dataset? data sources are varied and probably not integrated. Also maby simpler solutions are not being explored, maby data is not being used at all to prioritize accounts.
+
+How would we know if the model works? at this point we should separate technical metrics from operational metrics and busniness metrics. For the model itself the best metric would probably be conversion lift in the K ranked accounts (where K reflects reps capacity). So if reps can only work 10% of accounts, the metric would be conversion rate in the top 10% by score / overall conversion rate.
+
+Once deployed the best buiness KPI could be revenue per rep hour as it directly reflects model usage impact on economic results. This should be tested in an A/B scenario establishing a baseline with users using the As-Is process and another group using the new model driven process.
+
+Important observation: What does converted_within_90d actually capture? It's a count/binary of conversion, not revenue. If deal sizes vary a lot, a model optimized for conversion probability could systematically undervalue high-ARR accounts — worth checking if any value/size field exists to sanity-check this gap, even informally.
+
+---
+
+## Entry 11 — Adding audit questions and compiling the audit intro
+
+**Date:** 2026-09-05
+
+**Prompt used:** "Before we go into audit, can you think of any other really important
+question to be answered at this point to correctly frame the model and make a product
+decision?" — asked alongside the performance/segment, correlation, and
+staleness/drift questions already drafted for the audit (Entry 10).
+
+**Additional questions proposed:** label leakage/circularity (whether features like
+`sales_contacts_90d` are consequences of prior contact rather than independent
+predictors, which would make the model learn "who did we already talk to" instead of
+"who is likely to convert"); selection bias in the training population (whether
+`training_data.csv` is a representative sample of the account universe or already
+filtered by past rep/manager selection); calibration of predicted probabilities, not
+just ranking quality; baseline comparison against a trivial heuristic; what
+`converted_within_90d` actually captures (conversion count vs. revenue/deal size); and
+feature parity between `training_data.csv` and `accounts_to_score.csv`.
+
+**Follow-up decision:** dropped the calibration question — not a priority for this
+audit. Kept the `converted_within_90d`-captures-revenue question, but as a **noted
+limitation rather than a check to run**, since there's no deal-size field available to
+resolve it either way.
+
+**Action:** compiled the final objective and 7-question checklist (performance by
+segment, variable correlation to target, staleness/drift, label leakage, selection
+bias, baseline comparison, feature parity) plus the noted revenue-proxy limitation into
+the introduction cell of `audit/model_data_audit.ipynb`, to guide the step-by-step
+build of the notebook.
