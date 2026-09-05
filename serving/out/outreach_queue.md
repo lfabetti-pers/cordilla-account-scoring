@@ -51,14 +51,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00400 · 86d-old snapshot
 **Why it surfaced:** This account surfaced on rep contacts so far = 4, intent score 24, website visits = 0. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** rep contacts so far = 4 (raises) | intent score 24 (raises) | website visits = 0 (raises)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 24 | web touchpoints in window: 0 | employee count: 109 | industry: Software
 
 **Subject:** Quick question about your software workflows
 
 > Hi there,
 >
-> Picking this back up — I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — I saw that you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -105,14 +105,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00533 · 13d-old snapshot
 **Why it surfaced:** This account surfaced on intent score 63, website visits = 7. Working against it: Manufacturing. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** intent score 63 (raises) | website visits = 7 (raises) | Manufacturing (lowers)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 63 | web touchpoints in window: 7 | employee count: 65 | industry: Manufacturing
 
 **Subject:** Quick question about your manufacturing workflows
 
 > Hi there,
 >
-> I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> I saw that you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -123,14 +123,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-01019 · 130d-old snapshot
 **Why it surfaced:** This account surfaced on rep contacts so far = 4, intent score 8, website visits = 0. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** rep contacts so far = 4 (raises) | intent score 8 (raises) | website visits = 0 (raises)  
-**The email rests on:** 5 people from your team asked us for something  
+**The email rests on:** had 5 people from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 8 | web touchpoints in window: 0 | employee count: 29 | industry: Manufacturing
 
 **Subject:** Quick question about your manufacturing workflows
 
 > Hi there,
 >
-> Picking this back up — our records show you 5 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — our records show you had 5 people from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -141,14 +141,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-01155 · 30d-old snapshot
 **Why it surfaced:** This account surfaced on intent score 24, rep contacts so far = 7. Working against it: marketing-qualified actions = 4. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** intent score 24 (raises) | rep contacts so far = 7 (raises) | marketing-qualified actions = 4 (lowers)  
-**The email rests on:** 4 people from your team asked us for something  
+**The email rests on:** had 4 people from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 24 | web touchpoints in window: 1 | employee count: 85 | industry: Retail
 
 **Subject:** Quick question about your retail workflows
 
 > Hi there,
 >
-> Picking this back up — I saw that you 4 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — I saw that you had 4 people from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -159,14 +159,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-01129 · 126d-old snapshot
 **Why it surfaced:** This account surfaced on intent score 78, website visits = 5. Working against it: Manufacturing. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** intent score 78 (raises) | website visits = 5 (raises) | Manufacturing (lowers)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 78 | web touchpoints in window: 5 | employee count: 76 | industry: Manufacturing
 
 **Subject:** Quick question about your manufacturing workflows
 
 > Hi there,
 >
-> Our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Our records show you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -177,14 +177,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00100 · 94d-old snapshot
 **Why it surfaced:** This account surfaced on website visits = 12, company size = 16. Working against it: Software. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** website visits = 12 (raises) | Software (lowers) | company size = 16 (raises)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 42 | web touchpoints in window: 12 | employee count: 16 | industry: Software
 
 **Subject:** Quick question about your software workflows
 
 > Hi there,
 >
-> Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — our records show you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -213,14 +213,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-01496 · 113d-old snapshot
 **Why it surfaced:** This account surfaced on website visits = 13, intent score 38. Working against it: marketing-qualified actions = 2. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** website visits = 13 (raises) | intent score 38 (raises) | marketing-qualified actions = 2 (lowers)  
-**The email rests on:** 2 people from your team asked us for something  
+**The email rests on:** had 2 people from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 38 | web touchpoints in window: 13 | employee count: 277 | industry: Retail
 
 **Subject:** Quick question about your retail workflows
 
 > Hi there,
 >
-> Our records show you 2 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Our records show you had 2 people from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -231,14 +231,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-01102 · 96d-old snapshot
 **Why it surfaced:** This account surfaced on website visits = 10, company size = 29. Working against it: Professional Services. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** website visits = 10 (raises) | Professional Services (lowers) | company size = 29 (raises)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 42 | web touchpoints in window: 10 | employee count: 29 | industry: Professional Services
 
 **Subject:** Quick question about your professional services workflows
 
 > Hi there,
 >
-> Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — our records show you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -249,14 +249,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00101 · 140d-old snapshot
 **Why it surfaced:** This account surfaced on rep contacts so far = 6, website visits = 0. Working against it: Manufacturing. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** rep contacts so far = 6 (raises) | website visits = 0 (raises) | Manufacturing (lowers)  
-**The email rests on:** 2 people from your team asked us for something  
+**The email rests on:** had 2 people from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 46 | web touchpoints in window: 0 | employee count: 30 | industry: Manufacturing
 
 **Subject:** Quick question about your manufacturing workflows
 
 > Hi there,
 >
-> Picking this back up — our records show you 2 people from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — our records show you had 2 people from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -321,14 +321,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00828 · 60d-old snapshot
 **Why it surfaced:** This account surfaced on rep contacts so far = 5, website visits = 0. Working against it: Healthcare. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** rep contacts so far = 5 (raises) | website visits = 0 (raises) | Healthcare (lowers)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 39 | web touchpoints in window: 0 | employee count: 23 | industry: Healthcare
 
 **Subject:** Quick question about your healthcare workflows
 
 > Hi there,
 >
-> Picking this back up — I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — I saw that you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -339,14 +339,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-01471 · 29d-old snapshot
 **Why it surfaced:** This account surfaced on website visits = 9, intent score 46. Working against it: Professional Services. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** website visits = 9 (raises) | Professional Services (lowers) | intent score 46 (raises)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 46 | web touchpoints in window: 9 | employee count: 83 | industry: Professional Services
 
 **Subject:** Quick question about your professional services workflows
 
 > Hi there,
 >
-> I saw that you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> I saw that you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -357,14 +357,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00915 · 104d-old snapshot
 **Why it surfaced:** This account surfaced on rep contacts so far = 6, intent score 44, company size = 93. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** rep contacts so far = 6 (raises) | intent score 44 (raises) | company size = 93 (raises)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 44 | web touchpoints in window: 3 | employee count: 93 | industry: Retail
 
 **Subject:** Quick question about your retail workflows
 
 > Hi there,
 >
-> Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — our records show you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 
@@ -429,14 +429,14 @@ The model's score chose which accounts got a draft and appears nowhere below. Pe
 ### ACC-00839 · 112d-old snapshot
 **Why it surfaced:** This account surfaced on rep contacts so far = 4, intent score 10, Manufacturing. Some of that is vendor and web data you can act on but should not quote back to them.  
 **Top 3 things that moved it:** rep contacts so far = 4 (raises) | intent score 10 (raises) | Manufacturing (raises)  
-**The email rests on:** 1 person from your team asked us for something  
+**The email rests on:** had 1 person from your team ask us for something  
 **Known but not said:** intent vendor coverage: yes, score 10 | web touchpoints in window: 1 | employee count: 48 | industry: Manufacturing
 
 **Subject:** Quick question about your manufacturing workflows
 
 > Hi there,
 >
-> Picking this back up — our records show you 1 person from your team asked us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
+> Picking this back up — our records show you had 1 person from your team ask us for something. I work with teams sizing up whether workflow automation is worth the switching cost, and I can usually tell in one call whether it is.
 >
 > Worth fifteen minutes to find out?
 

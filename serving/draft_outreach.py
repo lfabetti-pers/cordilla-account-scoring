@@ -89,7 +89,7 @@ def build_evidence(row):
     if row.mql_count_90d > 0:
         n = int(row.mql_count_90d)
         referenceable.append(
-            f"{n} {'people' if n != 1 else 'person'} from your team asked us for something"
+            f"had {n} {'people' if n != 1 else 'person'} from your team ask us for something"
         )
     if row.account_type == "Former Customer":
         referenceable.append("worked with Cordilla before")
