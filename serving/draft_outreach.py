@@ -258,16 +258,20 @@ def generate_opener(payload):
     """
     if os.environ.get("ANTHROPIC_API_KEY"):
         # --- live call plugs in here -------------------------------------------------
-        from anthropic import Anthropic  # not in requirements.txt; only needed live
+        try:
+            from anthropic import Anthropic  # not in requirements.txt; only needed live
 
-        resp = Anthropic().messages.create(
-            model="claude-sonnet-5",
-            max_tokens=600,
-            messages=[{"role": "user", "content": build_prompt(payload)}],
-        )
-        out = json.loads(resp.content[0].text)
-        out["source"] = "claude-sonnet-5"
-        return out
+            resp = Anthropic().messages.create(
+                model="claude-sonnet-5",
+                max_tokens=600,
+                messages=[{"role": "user", "content": build_prompt(payload)}],
+            )
+            out = json.loads(resp.content[0].text)
+            out["source"] = "claude-sonnet-5"
+            return out
+        except ImportError:
+            print("anthropic not installed (pip install anthropic) — using template",
+                  file=sys.stderr)
         # -----------------------------------------------------------------------------
 
     # Fallback: same schema, no network. Mirrors the prompt's rules mechanically.
@@ -325,6 +329,8 @@ def main():
     df["score"] = model.predict_proba(df[FEATURES])[:, 1]
     df["snapshot_age_days"] = (TODAY - pd.to_datetime(df.snapshot_date)).dt.days
 
+    if args.top_n < 1:
+        sys.exit("--top-n must be at least 1")
     candidates = df.nlargest(args.top_n, "score")
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "prompts").mkdir(exist_ok=True)
