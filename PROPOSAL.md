@@ -84,30 +84,22 @@ present; and that the score orders candidates well enough to be worth using — 
 one, which is why the gates are ordinary code that holds whatever the model does.
 
 **How we would know it works.** Three layers, kept separate so a good number at one is
-never mistaken for success at another.
-
-*Model.* Conversion lift in the top K accounts, where K is actual rep capacity — if reps
-can work 10% of the base, the measure is conversion in the top 10% by score divided by the
-overall rate. This cannot be computed today: no labeled holdout exists, which is the
-blocking dependency from section 2. The pilot is what produces it, one closed 90-day window
-at a time.
-
-*Operational.* Approval rate reads in week one and is the kill criterion — if reps reject
-or heavily rewrite most drafts, the evidence is too thin and we stop. What they edit says
-what is missing. Then hours returned per rep per week, and reply rate per hundred sends
-against the current cold baseline.
-
-*Business.* **Revenue per rep hour**, the metric from section 1, because it captures usage
-impact on economic results rather than activity. Tested as an A/B: one group on the as-is
-process as baseline, one on the queue, with eligible accounts randomly withheld so the tool
-is separated from the rep. Both halves of the chain must move — hours freed, *and* those
-hours spent on accounts that close better than what reps pick unaided. Hours freed alone
-proves nothing.
-
-Separately, the assumption this design rests on — that rep value sits in judgment rather
-than in research and drafting — is validated in discovery, not by the pilot: where time
-actually goes today, which activities reps believe move conversion, and where they think
-automation would free real selling capacity.
+never mistaken for success at another. **Technical:** conversion lift in the top K
+accounts, where K is real rep capacity — if reps can work 10% of the base, conversion in
+the top 10% by score over the overall rate. This cannot be computed today; no labeled
+holdout exists, which is the blocking dependency from section 2, and the pilot is what
+produces it. **Operational:** adoption (how many reps work the queue, and how much of it),
+acceptance versus rejection of suggestions, how much of an accepted draft gets rewritten,
+emails actually sent, and reply rate per hundred sends against the current cold baseline.
+Acceptance rate reads in week one and is the kill criterion: if reps reject or heavily
+rewrite most drafts the evidence is too thin and we stop, while what they edit tells us
+what is missing. **Business:** revenue per rep hour, the metric from section 1, since it
+captures economic impact rather than activity — tested as an A/B against a control group
+on the as-is process, with eligible accounts randomly withheld. Both halves must move:
+hours freed, and those hours spent on accounts that close better than reps pick unaided.
+Hours freed alone proves nothing. Separately, the assumption this rests on — that rep value
+sits in judgment rather than research and drafting — is validated in discovery, not by the
+pilot.
 
 ## 4. Productionization and trust
 
